@@ -1,17 +1,18 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 
 import Navigator from './components/Navigator'
 import firebase from 'firebase'
+import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID } from '@env'
 
 const App = () => {
   const firebaseConfig = {
-    apiKey: 'AIzaSyAoVpRWdPczUQSj4sc93aNzGAhfLxeoW8w',
-    authDomain: 'foodies-react-native-expo.firebaseapp.com',
-    projectId: 'foodies-react-native-expo',
-    storageBucket: 'foodies-react-native-expo.appspot.com',
-    messagingSenderId: '685724378052',
-    appId: '1:685724378052:web:fbf3c11c73dd2690927a91'
+    apiKey: API_KEY,
+    authDomain: AUTH_DOMAIN,
+    projectId: PROJECT_ID,
+    storageBucket: STORAGE_BUCKET,
+    messagingSenderId: MESSAGING_SENDER_ID,
+    appId: APP_ID
   }
   firebase.initializeApp(firebaseConfig)
   return (
