@@ -1,5 +1,5 @@
 import React, { Dispatch, useState } from 'react'
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import globalStyles from '../assets/global-styles'
 import firebase from 'firebase'
@@ -20,7 +20,10 @@ const LoginView = (props: { authenticated: Dispatch<React.SetStateAction<boolean
   return (
     <View style={style.container}>
       <View style={style.content}>
-        <View style={style.imagePlaceholder} />
+        <Image
+          source={{ uri: require('../assets/login.png') }}
+          style={style.image}
+        />
         <View style={style.loginForm}>
           <Text style={globalStyles.titleText}>
             Login
@@ -29,6 +32,7 @@ const LoginView = (props: { authenticated: Dispatch<React.SetStateAction<boolean
             style={[globalStyles.textInput, { marginTop: 20 }]}
             placeholder='Email'
             keyboardType='email-address'
+            autoCompleteType='email'
             value={email}
             onChangeText={setEmail}
           />
@@ -36,6 +40,8 @@ const LoginView = (props: { authenticated: Dispatch<React.SetStateAction<boolean
             style={[globalStyles.textInput, { marginTop: 10, marginBottom: 20 }]}
             placeholder='Password'
             keyboardType='visible-password'
+            autoCompleteType='password'
+            secureTextEntry={true}
             value={password}
             onChangeText={setPassword}
           />
@@ -60,13 +66,13 @@ const style = StyleSheet.create({
   content: {
     margin: 'auto'
   },
-  imagePlaceholder: {
-    height: 150,
-    width: 150,
+  image: {
+    height: 200,
+    width: 200,
     marginBottom: 30,
     marginHorizontal: 'auto',
     backgroundColor: 'white',
-    borderRadius: 150 / 2
+    borderRadius: 200 / 2
   },
   loginForm: {
     margin: 20

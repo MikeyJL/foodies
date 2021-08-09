@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import globalStyles from '../assets/global-styles'
 import firebase from 'firebase'
@@ -31,7 +31,10 @@ const RegisterView = (props: { authenticated: Dispatch<SetStateAction<boolean>> 
   return (
     <View style={style.container}>
       <View style={style.content}>
-        <View style={style.imagePlaceholder} />
+        <Image
+          source={{ uri: require('../assets/register.png') }}
+          style={style.image}
+        />
         <View style={style.registerForm}>
           <Text style={globalStyles.titleText}>
             Register
@@ -40,6 +43,7 @@ const RegisterView = (props: { authenticated: Dispatch<SetStateAction<boolean>> 
             style={[globalStyles.textInput, { marginTop: 20 }]}
             placeholder='Email'
             keyboardType='email-address'
+            autoCompleteType='email'
             value={email}
             onChangeText={setEmail}
           />
@@ -47,6 +51,7 @@ const RegisterView = (props: { authenticated: Dispatch<SetStateAction<boolean>> 
             style={[globalStyles.textInput, { marginTop: 10 }]}
             placeholder='Password'
             keyboardType='visible-password'
+            secureTextEntry={true}
             value={password}
             onChangeText={setPassword}
           />
@@ -54,6 +59,7 @@ const RegisterView = (props: { authenticated: Dispatch<SetStateAction<boolean>> 
             style={[globalStyles.textInput, { marginTop: 10, marginBottom: 20 }]}
             placeholder='Confirm password'
             keyboardType='visible-password'
+            secureTextEntry={true}
             value={confirm}
             onChangeText={setConfirm}
           />
@@ -78,13 +84,13 @@ const style = StyleSheet.create({
   content: {
     margin: 'auto'
   },
-  imagePlaceholder: {
-    height: 150,
-    width: 150,
+  image: {
+    height: 200,
+    width: 200,
     marginBottom: 30,
     marginHorizontal: 'auto',
     backgroundColor: 'white',
-    borderRadius: 150 / 2
+    borderRadius: 200 / 2
   },
   registerForm: {
     margin: 20
