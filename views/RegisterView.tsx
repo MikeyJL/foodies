@@ -1,12 +1,32 @@
-import React, { Component, useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import globalStyles from '../assets/global-styles'
+import firebase from 'firebase'
 
-const RegisterView = () => {
+const RegisterView = (props: { authenticated: Dispatch<SetStateAction<boolean>> }): JSX.Element => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
+
+  function register ():void {
+    if (password === confirm) {
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+        firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+          props.authenticated(true)
+        }).catch((error: Error) => {
+          console.log(error)
+          // TODO: Create an alert
+        })
+      }).catch((error: Error) => {
+        console.log(error)
+        // TODO: Create an alert
+      })
+    } else {
+      console.log('Password does not match ')
+      // TODO: Create an alert
+    }
+  }
 
   return (
     <View style={style.container}>
@@ -39,7 +59,7 @@ const RegisterView = () => {
           />
           <TouchableOpacity
             style={globalStyles.button}
-            onPress={() => {}}
+            onPress={() => {register}}
           >
             <Text style={globalStyles.buttonText}>
               Sign up
