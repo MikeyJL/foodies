@@ -116,8 +116,8 @@ const FeedView = () => {
   }
 
   return creating ? (
-    <ScrollView style={[globalStyles.container, { marginVertical: 'auto' }]}>
-      <View>
+    <ScrollView style={globalStyles.container}>
+      <View style={{ marginTop: 30 }}>
         <Image
           source={image}
           resizeMode='contain'
