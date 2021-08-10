@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, Platform } from 'react
 import * as ImagePicker from 'expo-image-picker'
 import firebase from 'firebase';
 import { v4 as uuidv4 } from 'uuid'
+import PostList from '../components/PostList';
 
 const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boolean>> }) => {
   const [init, setInit] = useState(false)
@@ -30,7 +31,8 @@ const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boole
               id: doc.id,
               email: doc.data().email,
               image: doc.data().imageUrl,
-              caption: doc.data().caption
+              caption: doc.data().caption,
+              date: doc.data().createdAt
             }
             arr.push(data)
           })
@@ -115,32 +117,6 @@ const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boole
     )
   }
 
-  const postList = (): JSX.Element => {
-    if (showPosts) {
-      return posts.map((post: any) => (
-        <View
-          key={post.id}
-          style={style.post}
-        >
-          <Image
-            style={style.postImage}
-            source={{ uri: post.image }}
-          />
-          <Text>
-            {post.caption}
-          </Text>
-        </View>
-      )
-    )
-    } else {
-      return (
-        <Text>
-          No posts yet
-        </Text>
-      )
-    }
-  }
-
   return (
     <View>
         <View style={style.header}>
@@ -157,9 +133,11 @@ const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boole
             </Text>
           </TouchableOpacity>
         </View>
-        <View>
-          {postList()}
-        </View>
+        <PostList
+          posts={posts}
+          show={showPosts}
+          setShow={setShowPosts}
+        />
     </View>
   )
 }
@@ -167,7 +145,8 @@ const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boole
 const style = StyleSheet.create({
   header: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginTop: 40
   },
   logoutIcon: {
   },
@@ -178,18 +157,6 @@ const style = StyleSheet.create({
     marginRight: 'auto',
     backgroundColor: 'white',
     borderRadius: 120 / 2
-  },
-  post: {
-    borderRadius: 15,
-    marginTop: 20
-  },
-  postImage: {
-    height: '200px',
-    width: '100%',
-  },
-  postText: {
-    padding: 10,
-    backgroundColor: 'white'
   }
 })
 

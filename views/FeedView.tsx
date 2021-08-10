@@ -63,13 +63,18 @@ const FeedView = () => {
           // TODO: Better logging
         },
         () => {
+          const DATE = new Date()
+          const DD = DATE.getDate()
+          const MM = DATE.getMonth()
+          const YY = DATE.getFullYear()
+          const NEW_DATE = `${DD} ${MM} ${YY}`
           ref.snapshot.ref.getDownloadURL().then(async (url) => {
             firebase.firestore().collection('posts').add({
               email: await firebase.auth().currentUser?.email,
               imageUrl: url,
               imageId: UUID,
               caption,
-              createdAt: new Date()
+              createdAt: NEW_DATE
             }).catch((error: Error) => {
               console.log(error)
               // TODO: better logging
