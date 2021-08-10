@@ -1,5 +1,5 @@
 import React, { Dispatch, useEffect, useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Image, Platform } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
 import firebase from 'firebase';
 import { v4 as uuidv4 } from 'uuid'
@@ -10,6 +10,7 @@ const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boole
   const [init, setInit] = useState(false)
   const [posts, setPosts] = useState(null as any)
   const [showPosts, setShowPosts] = useState(false)
+  const [postsCount, setPostsCount] = useState(0)
   const [showProfileImage, setShowProfileImage] = useState(false)
   const [profileImage, setProfileImage] = useState(null as any)
   const email = firebase.auth().currentUser?.email
@@ -38,6 +39,7 @@ const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boole
             arr.push(data)
           })
           setPosts(arr)
+          setPostsCount(arr.length)
           setShowPosts(true)
         }
       })
@@ -112,7 +114,7 @@ const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boole
       >
         <Image
           style={style.image}
-          source={showProfileImage ? profileImage : ''}
+          source={showProfileImage ? profileImage : require('../assets/upload.png')}
         />
       </TouchableOpacity>
     )
@@ -122,19 +124,27 @@ const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boole
     <View>
       <View style={style.header}>
         <ProfileImageComponent />
-        <TouchableOpacity
-          style={style.logoutIcon}
-          onPress={() => {
-            firebase.auth().signOut(),
-            props.authenticated(false)
-          }}
-        >
-          <MaterialIcons
-            name='logout'
-            size={24}
-            color='#050505'
-          />
-        </TouchableOpacity>
+        <View style={style.bio}>
+          <TouchableOpacity
+            style={style.logoutIcon}
+            onPress={() => {
+              firebase.auth().signOut(),
+              props.authenticated(false)
+            }}
+          >
+            <MaterialIcons
+              name='logout'
+              size={24}
+              color='#050505'
+            />
+          </TouchableOpacity>
+          <Text style={style.bioEmail}>
+            {email}
+          </Text>
+          <Text>
+            {postsCount} { postsCount === 1 ? 'post' : 'posts' } created
+          </Text>
+        </View>
       </View>
       <PostList
         posts={posts}
@@ -149,6 +159,7 @@ const style = StyleSheet.create({
   header: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-around',
     marginTop: 40
   },
   logoutIcon: {
@@ -161,6 +172,16 @@ const style = StyleSheet.create({
     marginRight: 'auto',
     backgroundColor: 'white',
     borderRadius: 120 / 2
+  },
+  bio: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  bioEmail: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginHorizontal: 'auto'
   }
 })
 

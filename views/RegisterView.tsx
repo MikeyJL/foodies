@@ -65,7 +65,7 @@ const RegisterView = (props: { authenticated: Dispatch<SetStateAction<boolean>> 
           />
           <TouchableOpacity
             style={globalStyles.button}
-            onPress={() => {register}}
+            onPress={register}
           >
             <Text style={globalStyles.buttonText}>
               Sign up

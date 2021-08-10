@@ -7,7 +7,7 @@ const PostList = (props: {
     setShow: Dispatch<SetStateAction<boolean>>
   }): JSX.Element => {
   if (props.show) {
-    return (props.posts.map((post: any) => (
+    return props.posts.length !== 0 ? (props.posts.map((post: any) => (
       <View
         key={post.id}
         style={style.post}
@@ -30,13 +30,20 @@ const PostList = (props: {
           </View>
         </View>
       </View>
-    ))
-  )
+    ))) : (
+      <View>
+        <Text>
+          No posts yet
+        </Text>
+      </View>
+    )
   } else {
     return (
-      <Text>
-        No posts yet
-      </Text>
+      <View>
+        <Text>
+          No posts yet
+        </Text>
+      </View>
     )
   }
 }
