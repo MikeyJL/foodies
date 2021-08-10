@@ -5,21 +5,46 @@ import { ScrollView } from 'react-native-gesture-handler'
 import globalStyles from '../assets/global-styles'
 import firebase from 'firebase'
 import { v4 as uuidv4 } from 'uuid'
+import PostList from '../components/PostList'
+import { AntDesign, Feather } from '@expo/vector-icons'
 
 const FeedView = () => {
+  const [init, setInit] = useState(false)
+  const [posts, setPosts] = useState(null as any)
+  const [showPosts, setShowPosts] = useState(false)
   const [creating, setCreating] = useState(false)
   const [image, setImage] = useState(null as any)
   const [caption, setCaption] = useState('')
 
   useEffect(() => {
-    (async () => {
-      if (Platform.OS !== 'web') {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
-        if (status !== 'granted') {
-          alert('In order to post, you need to give us permission to use your photo library')
+    if (!init) {
+      (async () => {
+        if (Platform.OS !== 'web') {
+          const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+          if (status !== 'granted') {
+            alert('In order to post, you need to give us permission to use your photo library')
+          }
         }
-      }
-    })
+      })
+      firebase.firestore().collection('posts').get().then((snapshot) => {
+        if (snapshot.docs.length !== 0) {
+          const arr: Array<{ id: string, email: string, image: string, caption: string }> = []
+          snapshot.docs.forEach((doc) => {
+            const data = {
+              id: doc.id,
+              email: doc.data().email,
+              image: doc.data().imageUrl,
+              caption: doc.data().caption,
+              date: doc.data().createdAt
+            }
+            arr.push(data)
+          })
+          setPosts(arr)
+          setShowPosts(true)
+        }
+      })
+      setInit(true)
+    }
   })
 
   const pickImage = async () => {
@@ -127,16 +152,23 @@ const FeedView = () => {
       </ScrollView>
     </View>
   ) : (
-    <View>
+    <ScrollView>
       <TouchableOpacity
         style={style.createIcon}
         onPress={pickImage}
       >
-        <Text>
-          New
-        </Text>
+        <Feather
+          name='plus-circle'
+          size={24}
+          color='#050505'
+        />
       </TouchableOpacity>
-    </View>
+      <PostList
+        posts={posts}
+        show={showPosts}
+        setShow={setShowPosts}
+      />
+    </ScrollView>
   )
 }
 
@@ -145,6 +177,7 @@ const style = StyleSheet.create({
     margin: 'auto'
   },
   createIcon: {
+    marginTop: 20,
     marginLeft: 'auto'
   },
   imageHolder: {

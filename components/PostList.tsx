@@ -54,7 +54,7 @@ const style = StyleSheet.create({
     borderTopRightRadius: 15
   },
   postText: {
-    padding: 10,
+    padding: 15,
     borderBottomLeftRadius: 15, 
     borderBottomRightRadius: 15,
     backgroundColor: 'white'

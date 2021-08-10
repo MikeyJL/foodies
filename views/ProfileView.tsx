@@ -4,6 +4,7 @@ import * as ImagePicker from 'expo-image-picker'
 import firebase from 'firebase';
 import { v4 as uuidv4 } from 'uuid'
 import PostList from '../components/PostList';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boolean>> }) => {
   const [init, setInit] = useState(false)
@@ -119,25 +120,27 @@ const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boole
 
   return (
     <View>
-        <View style={style.header}>
-          <ProfileImageComponent />
-          <TouchableOpacity
-            style={style.logoutIcon}
-            onPress={() => {
-              firebase.auth().signOut(),
-              props.authenticated(false)
-            }}
-          >
-            <Text>
-              Log out
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <PostList
-          posts={posts}
-          show={showPosts}
-          setShow={setShowPosts}
-        />
+      <View style={style.header}>
+        <ProfileImageComponent />
+        <TouchableOpacity
+          style={style.logoutIcon}
+          onPress={() => {
+            firebase.auth().signOut(),
+            props.authenticated(false)
+          }}
+        >
+          <MaterialIcons
+            name='logout'
+            size={24}
+            color='#050505'
+          />
+        </TouchableOpacity>
+      </View>
+      <PostList
+        posts={posts}
+        show={showPosts}
+        setShow={setShowPosts}
+      />
     </View>
   )
 }
@@ -149,6 +152,7 @@ const style = StyleSheet.create({
     marginTop: 40
   },
   logoutIcon: {
+    marginLeft: 'auto'
   },
   image: {
     height: 120,

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { Feather, FontAwesome } from '@expo/vector-icons'
 
 import FeedView from '../views/FeedView'
 import ProfileView from '../views/ProfileView'
@@ -23,14 +24,24 @@ const Navigator = () => {
         name='feed'
         component={FeedView}
         options={{
-          title: 'Feed'
+          title: 'Feed',
+          tabBarIcon: () => <Feather
+            name='home'
+            size={20}
+            color='#050505'
+          />
         }}
       />
       <Tab.Screen
         name='profile'
         children={() => <ProfileView authenticated={setAuthenticated} />}
         options={{
-          title: 'Profile'
+          title: 'Profile',
+          tabBarIcon: () => <Feather
+            name='user'
+            size={20}
+            color='#050505'
+          />
         }}
       />
     </Tab.Navigator>
@@ -45,14 +56,24 @@ const Navigator = () => {
         name='log-in'
         children={() => <LoginView authenticated={setAuthenticated} />}
         options={{
-          title: 'Log in'
+          title: 'Log in',
+          tabBarIcon: () => <Feather
+            name='key'
+            size={20}
+            color='#050505'
+          />
         }}
       />
       <Tab.Screen
         name='register'
         component={RegisterView}
         options={{
-          title: 'Register'
+          title: 'Register',
+          tabBarIcon: () => <FontAwesome
+            name='wpforms'
+            size={20}
+            color='#050505'
+          />
         }}
       />
     </Tab.Navigator>
