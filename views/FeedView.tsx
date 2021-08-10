@@ -65,7 +65,7 @@ const FeedView = () => {
         () => {
           ref.snapshot.ref.getDownloadURL().then(async (url) => {
             firebase.firestore().collection('posts').add({
-              userEmail: await firebase.auth().currentUser?.email,
+              email: await firebase.auth().currentUser?.email,
               imageUrl: url,
               imageId: UUID,
               caption,
