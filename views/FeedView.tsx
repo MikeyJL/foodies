@@ -116,43 +116,41 @@ const FeedView = () => {
   }
 
   return creating ? (
-    <View style={style.container}>
-      <ScrollView>
-        <View>
-          <Image
-            source={image}
-            resizeMode='contain'
-            style={style.imageHolder}
-          />
-          <TextInput
-            style={style.captionInput}
-            placeholder='Caption'
-            keyboardType='default'
-            multiline={true}
-            value={caption}
-            onChangeText={setCaption}
-          />
-        </View>
-        <TouchableOpacity
-          style={[globalStyles.button, { backgroundColor: 'green', marginBottom: 10 }]}
-          onPress={createPost}
-        >
-          <Text style={globalStyles.buttonText}>
-            Post
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={globalStyles.button}
-          onPress={() => { setCreating(false) }}
-        >
-          <Text style={globalStyles.buttonText}>
-            Cancel
-          </Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </View>
+    <ScrollView style={[globalStyles.container, { marginVertical: 'auto' }]}>
+      <View>
+        <Image
+          source={image}
+          resizeMode='contain'
+          style={style.imageHolder}
+        />
+        <TextInput
+          style={style.captionInput}
+          placeholder='Caption'
+          keyboardType='default'
+          multiline={true}
+          value={caption}
+          onChangeText={setCaption}
+        />
+      </View>
+      <TouchableOpacity
+        style={[globalStyles.button, { backgroundColor: 'green', marginBottom: 10 }]}
+        onPress={createPost}
+      >
+        <Text style={globalStyles.buttonText}>
+          Post
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={globalStyles.button}
+        onPress={() => { setCreating(false) }}
+      >
+        <Text style={globalStyles.buttonText}>
+          Cancel
+        </Text>
+      </TouchableOpacity>
+    </ScrollView>
   ) : (
-    <ScrollView>
+    <ScrollView style={globalStyles.container}>
       <TouchableOpacity
         style={style.createIcon}
         onPress={pickImage}
@@ -173,9 +171,6 @@ const FeedView = () => {
 }
 
 const style = StyleSheet.create({
-  container: {
-    margin: 'auto'
-  },
   createIcon: {
     marginTop: 20,
     marginLeft: 'auto'

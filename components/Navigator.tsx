@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { StyleSheet } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Feather, FontAwesome } from '@expo/vector-icons'
 
@@ -18,7 +17,6 @@ const Navigator = () => {
       screenOptions={{
         headerShown: false
       }}
-      sceneContainerStyle={style.container}
     >
       <Tab.Screen
         name='feed'
@@ -50,7 +48,6 @@ const Navigator = () => {
       screenOptions={{
         headerShown: false
       }}
-      sceneContainerStyle={style.container}
     >
       <Tab.Screen
         name='log-in'
@@ -79,11 +76,5 @@ const Navigator = () => {
     </Tab.Navigator>
   )
 }
-
-const style = StyleSheet.create({
-  container: {
-    paddingHorizontal: 15
-  }
-})
 
 export default Navigator

@@ -5,6 +5,8 @@ import firebase from 'firebase';
 import { v4 as uuidv4 } from 'uuid'
 import PostList from '../components/PostList';
 import { MaterialIcons } from '@expo/vector-icons';
+import { ScrollView } from 'react-native-gesture-handler';
+import globalStyles from '../assets/global-styles';
 
 const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boolean>> }) => {
   const [init, setInit] = useState(false)
@@ -121,7 +123,7 @@ const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boole
   }
 
   return (
-    <View>
+    <ScrollView style={globalStyles.container}>
       <View style={style.header}>
         <ProfileImageComponent />
         <View style={style.bio}>
@@ -151,7 +153,7 @@ const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boole
         show={showPosts}
         setShow={setShowPosts}
       />
-    </View>
+    </ScrollView>
   )
 }
 
