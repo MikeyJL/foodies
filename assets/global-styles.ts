@@ -6,7 +6,7 @@ export default StyleSheet.create({
     fontSize: 26
   },
   textInput: {
-    fontSize: 22,
+    fontSize: 20,
     borderWidth: 2,
     borderRadius: 6,
     borderColor: '#00000060',

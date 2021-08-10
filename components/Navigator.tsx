@@ -61,7 +61,7 @@ const Navigator = () => {
 
 const style = StyleSheet.create({
   container: {
-    paddingHorizontal: 10
+    paddingHorizontal: 15
   }
 })
 
