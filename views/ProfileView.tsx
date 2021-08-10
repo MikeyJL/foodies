@@ -1,5 +1,5 @@
 import React, { Dispatch, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Platform } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Image, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
 import firebase from 'firebase';
 import { v4 as uuidv4 } from 'uuid'

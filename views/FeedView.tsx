@@ -6,7 +6,7 @@ import globalStyles from '../assets/global-styles'
 import firebase from 'firebase'
 import { v4 as uuidv4 } from 'uuid'
 import PostList from '../components/PostList'
-import { AntDesign, Feather } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons'
 
 const FeedView = () => {
   const [init, setInit] = useState(false)
