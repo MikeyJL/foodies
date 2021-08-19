@@ -11,10 +11,17 @@ import { TextInput } from 'react-native-gesture-handler'
 import globalStyles from '../assets/global-styles'
 import firebase from 'firebase'
 
+/**
+ * @param {Dispatch<React.SetStateAction<boolean>>} props.authenticated - Whether the user is authenticated or not. 
+ * @returns {JSX.Element} - The login element.
+ */
 const LoginView = (props: { authenticated: Dispatch<React.SetStateAction<boolean>> }): JSX.Element => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  /**
+   * Logs the user in with email and password on firebase auth.
+   */
   function login ():void {
     firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
       props.authenticated(true)
@@ -24,6 +31,9 @@ const LoginView = (props: { authenticated: Dispatch<React.SetStateAction<boolean
     })
   }
 
+  /**
+   * The JSX element.
+   */
   return (
     <View style={style.container}>
       <View style={style.content}>

@@ -11,11 +11,18 @@ import { TextInput } from 'react-native-gesture-handler'
 import globalStyles from '../assets/global-styles'
 import firebase from 'firebase'
 
+/**
+ * @param {Dispatch<SetStateAction<boolean>>} props.authenticated - Whether the user is authenticated or not.
+ * @returns {JSX.Element} - The register view element.
+ */
 const RegisterView = (props: { authenticated: Dispatch<SetStateAction<boolean>> }): JSX.Element => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
 
+  /**
+   * Registers a new user on firebase auth.
+   */
   function register ():void {
     if (password === confirm) {
       firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
@@ -35,6 +42,9 @@ const RegisterView = (props: { authenticated: Dispatch<SetStateAction<boolean>> 
     }
   }
 
+  /**
+   * The JSX Element.
+   */
   return (
     <View style={style.container}>
       <View style={style.content}>

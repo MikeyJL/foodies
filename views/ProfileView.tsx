@@ -15,7 +15,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import globalStyles from '../assets/global-styles';
 
-const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boolean>> }) => {
+/**
+ * @param {boolean} props.authenticated - Whether the user is authenticated.
+ * @returns {JSX.Element} - The JSX element.
+ */
+const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boolean>> }): JSX.Element => {
   const [init, setInit] = useState(false)
   const [posts, setPosts] = useState(null as any)
   const [showPosts, setShowPosts] = useState(false)
@@ -66,7 +70,10 @@ const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boole
     }
   })
 
-  const pickImage = async () => {
+  /**
+   * Opens the image picker.
+   */
+  const pickImage = async (): Promise<void> => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -116,6 +123,9 @@ const ProfileView = (props: { authenticated: Dispatch<React.SetStateAction<boole
     }
   }
 
+  /**
+   * @returns {JSX.Element} - The element of the profile image viewer.
+   */
   const ProfileImageComponent = (): JSX.Element => {
     return (
       <TouchableOpacity

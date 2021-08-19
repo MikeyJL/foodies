@@ -8,6 +8,12 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { Text, View, Image, StyleSheet } from 'react-native'
 
+/**
+ * @param {any} props.posts - The posts.
+ * @param {boolean} props.show - Whether to show the post or not.
+ * @param {Dispatch<SetStateAction<boolean>>} props.setShow - Changes the state to show the element or not.
+ * @returns {JSX.Element} - The post list element. 
+ */
 const PostList = (props: {
     posts: any,
     show: boolean,

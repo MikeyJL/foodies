@@ -16,7 +16,7 @@ import RegisterView from '../views/RegisterView'
 
 const Tab = createBottomTabNavigator()
 
-const Navigator = () => {
+const Navigator = (): JSX.Element => {
   const [authenticated, setAuthenticated] = useState(false)
 
   return authenticated ? (
