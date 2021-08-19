@@ -1,3 +1,10 @@
+/**
+ * @file The register view.
+ * @author Mikey Lau
+ * {@link https//mikeylau.uk|Portfolio}
+ * {@link https://github.com/MikeyJL|Github}
+ */
+
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'

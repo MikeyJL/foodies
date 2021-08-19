@@ -1,3 +1,10 @@
+/**
+ * @file The feed view.
+ * @author Mikey Lau
+ * {@link https//mikeylau.uk|Portfolio}
+ * {@link https://github.com/MikeyJL|Github}
+ */
+
 import React, { useEffect, useState } from 'react'
 import { TextInput, Text, View, TouchableOpacity, StyleSheet, Platform, Image } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
@@ -8,7 +15,10 @@ import { v4 as uuidv4 } from 'uuid'
 import PostList from '../components/PostList'
 import { Feather } from '@expo/vector-icons'
 
-const FeedView = () => {
+/**
+ * @returns {JSX.Element} - The JSX view.
+ */
+const FeedView = (): JSX.Element => {
   const [init, setInit] = useState(false)
   const [posts, setPosts] = useState(null as any)
   const [showPosts, setShowPosts] = useState(false)
@@ -47,7 +57,10 @@ const FeedView = () => {
     }
   })
 
-  const pickImage = async () => {
+  /**
+   * Opens the image picker.
+   */
+  const pickImage = async (): Promise<void> => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -60,6 +73,9 @@ const FeedView = () => {
     }
   }
 
+  /**
+   * Creates the post on firestore.
+   */
   const createPost = async () => {
     if (image !== null) {
       const blob: any = await new Promise((resolve, reject) => {
@@ -115,6 +131,9 @@ const FeedView = () => {
     }
   }
 
+  /**
+   * JSX element.
+   */
   return creating ? (
     <ScrollView style={globalStyles.container}>
       <View style={{ marginTop: 30 }}>

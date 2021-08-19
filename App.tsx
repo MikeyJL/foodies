@@ -1,3 +1,10 @@
+/**
+ * @file The app.
+ * @author Mikey Lau
+ * {@link https//mikeylau.uk|Portfolio}
+ * {@link https://github.com/MikeyJL|Github}
+ */
+
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 

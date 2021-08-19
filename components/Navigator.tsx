@@ -1,3 +1,10 @@
+/**
+ * @file The navigator component.
+ * @author Mikey Lau
+ * {@link https//mikeylau.uk|Portfolio}
+ * {@link https://github.com/MikeyJL|Github}
+ */
+
 import React, { useState } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Feather, FontAwesome } from '@expo/vector-icons'

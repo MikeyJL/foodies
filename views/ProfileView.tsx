@@ -1,3 +1,10 @@
+/**
+ * @file The profile view.
+ * @author Mikey Lau
+ * {@link https//mikeylau.uk|Portfolio}
+ * {@link https://github.com/MikeyJL|Github}
+ */
+
 import React, { Dispatch, useEffect, useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
